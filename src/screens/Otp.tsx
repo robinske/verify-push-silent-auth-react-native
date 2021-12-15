@@ -8,6 +8,7 @@ import OtpInputs from "react-native-otp-inputs";
 const Otp = ({ route, navigation }) => {
   const { phoneNumber } = route.params;
   const [invalidCode, setInvalidCode] = useState(false);
+
   const inputLength = 6;
   return (
     <SafeAreaView style={commonStyles.wrapper}>
@@ -30,10 +31,13 @@ const Otp = ({ route, navigation }) => {
           if (code.length === inputLength) {
             checkVerification(phoneNumber, code).then((success) => {
               if (!success) setInvalidCode(true);
-              success && navigation.replace("RegisterPush", { phoneNumber });
+
+              // TODO - add a step to allow user to register device as a secure key
+              success && navigation.replace("Gated");
             });
           }
         }}
+        numberOfInputs={inputLength}
       />
       {invalidCode && <Text style={styles.error}>Incorrect code.</Text>}
     </SafeAreaView>

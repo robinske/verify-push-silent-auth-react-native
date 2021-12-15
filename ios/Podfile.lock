@@ -350,10 +350,6 @@ PODS:
     - React-RCTImage
   - RNSha256 (1.4.7):
     - React
-  - twilio-verify-for-react-native (0.2.0):
-    - React-Core
-    - TwilioVerify (~> 1.2.0)
-  - TwilioVerify (1.2.0)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
     - Yoga (~> 1.14)
@@ -417,7 +413,6 @@ DEPENDENCIES:
   - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNSha256 (from `../node_modules/react-native-sha256`)
-  - "twilio-verify-for-react-native (from `../node_modules/@twilio/twilio-verify-for-react-native`)"
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -435,7 +430,6 @@ SPEC REPOS:
     - fmt
     - libevent
     - OpenSSL-Universal
-    - TwilioVerify
     - YogaKit
 
 EXTERNAL SOURCES:
@@ -509,8 +503,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-screens"
   RNSha256:
     :path: "../node_modules/react-native-sha256"
-  twilio-verify-for-react-native:
-    :path: "../node_modules/@twilio/twilio-verify-for-react-native"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -563,8 +555,6 @@ SPEC CHECKSUMS:
   RNDeviceInfo: 0400a6d0c94186d1120c3cbd97b23abc022187a9
   RNScreens: 6e1ea5787989f92b0671049b808aef64fa1ef98c
   RNSha256: bf2c90a9e0cec6dcbcc4100e4e19715ae7feaa34
-  twilio-verify-for-react-native: f943e25ba7e6daaad43414f5705bf1bb0932b179
-  TwilioVerify: bbee3d3e40b5735ab598b0ad661b068c50931191
   Yoga: e7dc4e71caba6472ff48ad7d234389b91dadc280
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
