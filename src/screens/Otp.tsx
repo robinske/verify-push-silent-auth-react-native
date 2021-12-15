@@ -36,8 +36,8 @@ const Otp = ({ route, navigation }) => {
               success && navigation.replace("Gated");
             });
           }
+
         }}
-        numberOfInputs={inputLength}
       />
       {invalidCode && <Text style={styles.error}>Incorrect code.</Text>}
     </SafeAreaView>
