@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Text,
 } from "react-native";
+import commonStyles from "../styles/common-styles";
 import { Colors } from "react-native/Libraries/NewAppScreen";
 import PhoneInput from "react-native-phone-number-input";
 import Spinner from "react-native-loading-spinner-overlay";
@@ -24,9 +25,9 @@ const PhoneNumber = ({ navigation }) => {
         <Spinner
           visible={spinner}
           textContent={"Sending SMS..."}
-          textStyle={styles.spinnerTextStyle}
+          textStyle={commonStyles.spinnerTextStyle}
         />
-        <SafeAreaView style={styles.wrapper}>
+        <SafeAreaView style={commonStyles.wrapper}>
           <View style={styles.welcome}>
             <Text>Welcome!</Text>
           </View>
@@ -55,7 +56,7 @@ const PhoneNumber = ({ navigation }) => {
               });
             }}
           >
-            <Text style={styles.buttonText}>Sign Up</Text>
+            <Text style={commonStyles.buttonText}>Sign Up</Text>
           </TouchableOpacity>
         </SafeAreaView>
       </View>
@@ -67,12 +68,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.lighter,
-  },
-
-  wrapper: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
   },
 
   button: {
@@ -92,11 +87,6 @@ const styles = StyleSheet.create({
     elevation: 10,
   },
 
-  buttonText: {
-    color: "white",
-    fontSize: 14,
-  },
-
   welcome: {
     padding: 20,
   },
@@ -107,10 +97,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "flex-start",
     color: "gray",
-  },
-
-  spinnerTextStyle: {
-    color: "#FFFFFF",
   },
 });
 

@@ -6,6 +6,7 @@ import {
   Image,
   Text,
 } from "react-native";
+import commonStyles from "../styles/common-styles";
 import Spinner from "react-native-loading-spinner-overlay";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -15,11 +16,11 @@ const Welcome = ({ navigation }) => {
   const [spinner, setSpinner] = useState(false);
 
   return (
-    <SafeAreaView style={styles.wrapper}>
+    <SafeAreaView style={commonStyles.wrapper}>
       <Spinner
         visible={spinner}
         textContent={"Verifying..."}
-        textStyle={styles.spinnerTextStyle}
+        textStyle={commonStyles.spinnerTextStyle}
       />
       <Image
         style={styles.logo}
@@ -46,36 +47,23 @@ const Welcome = ({ navigation }) => {
             });
         }}
       >
-        <Text style={styles.buttonText}>Log in</Text>
+        <Text style={commonStyles.buttonText}>Log in</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={{ backgroundColor: "#AEB2C1", ...styles.button }}
         onPress={() => navigation.replace("PhoneNumber")}
       >
-        <Text style={styles.buttonText}>Register</Text>
+        <Text style={commonStyles.buttonText}>Register</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  wrapper: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-
   logo: {
     width: 200,
     height: 100,
     marginBottom: 100,
-  },
-
-  prompt: {
-    fontSize: 28,
-    paddingHorizontal: 30,
-    paddingBottom: 20,
-    textAlign: "center",
   },
 
   message: {
@@ -92,15 +80,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 6,
-  },
-
-  buttonText: {
-    color: "white",
-    fontSize: 16,
-  },
-
-  spinnerTextStyle: {
-    color: "white",
   },
 });
 

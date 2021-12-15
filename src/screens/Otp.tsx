@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { SafeAreaView, StyleSheet, Button, Text } from "react-native";
+import commonStyles from "../styles/common-styles";
 
 import { checkVerification } from "../api/verify";
 import OTPInputView from "@twotalltotems/react-native-otp-input";
@@ -8,9 +9,9 @@ const Otp = ({ route, navigation }) => {
   const { phoneNumber } = route.params;
   const [invalidCode, setInvalidCode] = useState(false);
   return (
-    <SafeAreaView style={styles.wrapper}>
-      <Text style={styles.prompt}>Enter the code we sent you</Text>
-      <Text style={styles.message}>
+    <SafeAreaView style={commonStyles.wrapper}>
+      <Text style={commonStyles.prompt}>Enter the code we sent you</Text>
+      <Text style={commonStyles.message}>
         {`Your phone (${phoneNumber}) will be used to protect your account each time you log in.`}
       </Text>
       <Button
@@ -36,12 +37,6 @@ const Otp = ({ route, navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  wrapper: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-
   borderStyleBase: {
     width: 30,
     height: 45,
@@ -62,17 +57,6 @@ const styles = StyleSheet.create({
 
   underlineStyleHighLighted: {
     borderColor: "#03DAC6",
-  },
-
-  prompt: {
-    fontSize: 24,
-    paddingHorizontal: 30,
-    paddingBottom: 20,
-  },
-
-  message: {
-    fontSize: 16,
-    paddingHorizontal: 30,
   },
 
   error: {
