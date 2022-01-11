@@ -28,7 +28,7 @@ const RegisterPush = ({ route, navigation }) => {
           createFactor(phoneNumber)
             .then(() => {
               setSpinner(false);
-              navigation.navigate("Gated");
+              navigation.replace("Gated");
             })
             .catch((e) => {
               console.error(e);

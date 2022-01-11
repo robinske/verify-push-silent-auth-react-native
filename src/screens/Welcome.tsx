@@ -17,7 +17,7 @@ const Welcome = ({ navigation }) => {
       />
       <TouchableOpacity
         style={{ backgroundColor: "#36D576", ...styles.button }}
-        onPress={() => navigation.navigate("Verifying")}
+        onPress={() => navigation.replace("Verifying")}
       >
         <Text style={commonStyles.buttonText}>Log in</Text>
       </TouchableOpacity>

@@ -10,16 +10,12 @@ const Verifying = ({ navigation }) => {
   const isFocused = useIsFocused();
 
   useEffect(() => {
-    console.log("effecting...");
-    async function authorize() {
-      console.log("authorizing...");
+    let verify = () =>
       AsyncStorage.getItem("@factor_sid")
         .then((factorSid) => {
-          console.log(factorSid);
           silentAuthorization(factorSid).then((approved) => {
             if (approved) {
-              console.log("approving...");
-              navigation.navigate("Gated");
+              navigation.replace("Gated");
             }
           });
         })
@@ -27,15 +23,19 @@ const Verifying = ({ navigation }) => {
           console.error(e);
           navigation.replace("PhoneNumber");
         });
-    }
 
-    authorize();
+    // enough time to briefly educate the user about what's happening
+    let timeout = setTimeout(() => verify(), 1000);
+
+    return () => {
+      clearTimeout(timeout);
+    };
   }, [isFocused]);
 
   return (
     <SafeAreaView style={commonStyles.wrapper}>
       <Text style={commonStyles.message}>
-        Using your device to verify this login...
+        Using your device to verify this login attempt...
       </Text>
     </SafeAreaView>
   );

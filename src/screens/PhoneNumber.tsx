@@ -52,7 +52,7 @@ const PhoneNumber = ({ navigation }) => {
               setSpinner(true);
               sendSmsVerification(formattedValue).then((sent) => {
                 setSpinner(false);
-                navigation.navigate("Otp", { phoneNumber: formattedValue });
+                navigation.replace("Otp", { phoneNumber: formattedValue });
               });
             }}
           >
