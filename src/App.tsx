@@ -7,6 +7,7 @@ import Otp from "./screens/Otp";
 import RegisterPush from "./screens/RegisterPush";
 import Gated from "./screens/Gated";
 import Welcome from "./screens/Welcome";
+import Verifying from "./screens/Verifying";
 
 const App = () => {
   type StackParamList = {
@@ -31,6 +32,7 @@ const App = () => {
         <Stack.Screen name="PhoneNumber" component={PhoneNumber} />
         <Stack.Screen name="Otp" component={Otp} />
         <Stack.Screen name="RegisterPush" component={RegisterPush} />
+        <Stack.Screen name="Verifying" component={Verifying} />
         <Stack.Screen name="Gated" component={Gated} />
       </Stack.Navigator>
     </NavigationContainer>
