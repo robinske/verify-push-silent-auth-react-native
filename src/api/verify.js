@@ -3,10 +3,6 @@ import { getDeviceName, getDeviceToken } from "react-native-device-info";
 import { sha256 } from "react-native-sha256";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-async function hash(value) {
-  return sha256(value);
-}
-
 import TwilioVerify, {
   PushFactorPayload,
   VerifyPushFactorPayload,
@@ -15,52 +11,47 @@ import TwilioVerify, {
 } from "@twilio/twilio-verify-for-react-native";
 
 export const createFactor = async (phoneNumber) => {
-  try {
-    // identity should not contain PII
-    const identity = await hash(phoneNumber);
+  // identity should not contain PII
+  const identity = await sha256(phoneNumber);
 
-    const response = await fetch(`${PUSH_BACKEND_URL}/access-token`, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        identity: identity,
-      }),
-    });
+  const response = await fetch(`${PUSH_BACKEND_URL}/access-token`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      identity: identity,
+    }),
+  });
 
-    const json = await response.json();
+  const json = await response.json();
 
-    const deviceName = await getDeviceName().catch(
-      () => `${phoneNumber}'s Device'`
-    );
+  const deviceName = await getDeviceName().catch(
+    () => `${phoneNumber}'s Device'`
+  );
 
-    const deviceToken = await getDeviceToken().catch(
-      () => "000000000000000000000000000000000000"
-    );
+  const deviceToken = await getDeviceToken().catch(
+    () => "000000000000000000000000000000000000"
+  );
 
-    const payload = new PushFactorPayload(
-      deviceName,
-      json.serviceSid,
-      json.identity,
-      deviceToken,
-      json.token
-    );
+  const payload = new PushFactorPayload(
+    deviceName,
+    json.serviceSid,
+    json.identity,
+    deviceToken,
+    json.token
+  );
 
-    let factor = await TwilioVerify.createFactor(payload);
-    factor = await TwilioVerify.verifyFactor(
-      new VerifyPushFactorPayload(factor.sid)
-    );
+  let factor = await TwilioVerify.createFactor(payload);
+  factor = await TwilioVerify.verifyFactor(
+    new VerifyPushFactorPayload(factor.sid)
+  );
 
-    AsyncStorage.setItem("@factor_sid", factor.sid);
-    AsyncStorage.setItem("@identity", identity);
+  AsyncStorage.setItem("@factor_sid", factor.sid);
+  AsyncStorage.setItem("@identity", identity);
 
-    return factor.sid;
-  } catch (e) {
-    console.error(`ERROR!`);
-    console.error(`${e}`);
-  }
+  return factor.sid;
 };
 
 export const silentAuthorization = async (factorSid) => {

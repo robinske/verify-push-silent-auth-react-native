@@ -19,7 +19,9 @@ const RegisterPush = ({ route, navigation }) => {
         Secure your account with this device?
       </Text>
       <Text style={commonStyles.message}>
-        {`Whenever there's a new login, we'll send a notification to this phone. It's safer than a text message and you can instantly approve or deny access.`}
+        Whenever there's a new login, we'll send a notification to this phone.
+        It's safer than a text message and you can instantly approve or deny
+        access.
       </Text>
       <TouchableOpacity
         style={{ backgroundColor: "#36D576", ...styles.button }}
@@ -31,6 +33,7 @@ const RegisterPush = ({ route, navigation }) => {
               navigation.replace("Gated");
             })
             .catch((e) => {
+              setSpinner(false);
               console.error(e);
             });
         }}
