@@ -1,4 +1,4 @@
-import { BASE_URL, ACCESS_TOKEN_URL, CHALLENGE_URL } from "@env";
+import { BASE_URL, PUSH_BACKEND_URL } from "@env";
 import { getDeviceName, getDeviceToken } from "react-native-device-info";
 import { sha256 } from "react-native-sha256";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -19,7 +19,7 @@ export const createFactor = async (phoneNumber) => {
     // identity should not contain PII
     const identity = await hash(phoneNumber);
 
-    const response = await fetch(ACCESS_TOKEN_URL, {
+    const response = await fetch(`${PUSH_BACKEND_URL}/access-token`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -73,7 +73,7 @@ export const silentAuthorization = async (factorSid) => {
       message: "Login request",
     });
 
-    const response = await fetch(CHALLENGE_URL, {
+    const response = await fetch(`${PUSH_BACKEND_URL}/create-challenge`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
