@@ -32,11 +32,9 @@ const Otp = ({ route, navigation }) => {
             checkVerification(phoneNumber, code).then((success) => {
               if (!success) setInvalidCode(true);
 
-              // TODO - add a step to allow user to register device as a secure key
-              success && navigation.replace("Gated");
+              success && navigation.replace("RegisterPush", { phoneNumber });
             });
           }
-
         }}
       />
       {invalidCode && <Text style={styles.error}>Incorrect code.</Text>}

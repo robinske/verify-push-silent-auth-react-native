@@ -9,7 +9,20 @@ import { useIsFocused } from "@react-navigation/native";
 const Verifying = ({ navigation }) => {
   const isFocused = useIsFocused();
 
-  // TODO
+  useEffect(() => {
+    AsyncStorage.getItem("@factor_sid")
+      .then((factorSid) => {
+        silentAuthorization(factorSid).then((approved) => {
+          if (approved) {
+            navigation.replace("Gated");
+          }
+        });
+      })
+      .catch((e) => {
+        console.error(e);
+        navigation.replace("PhoneNumber");
+      });
+  }, [isFocused]);
 
   return (
     <SafeAreaView style={commonStyles.wrapper}>
