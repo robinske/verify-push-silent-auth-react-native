@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.15.14",
+    "@react-native-clipboard/clipboard": "^1.8.5",
     "@react-native-community/clipboard": "^1.5.1",
     "@react-navigation/native": "^6.0.6",
     "@react-navigation/native-stack": "^6.2.5",
@@ -20,6 +21,7 @@
     "react-native-device-info": "^8.4.8",
     "react-native-dotenv": "^3.3.0",
     "react-native-loading-spinner-overlay": "^2.0.0",
+    "react-native-otp-inputs": "^7.1.1",
     "react-native-phone-number-input": "^2.1.0",
     "react-native-safe-area-context": "3.3.2",
     "react-native-screens": "~3.8.0",
