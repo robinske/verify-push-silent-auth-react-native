@@ -339,7 +339,7 @@ PODS:
     - React-jsi (= 0.66.4)
     - React-logger (= 0.66.4)
     - React-perflogger (= 0.66.4)
-  - RNCAsyncStorage (1.15.14):
+  - RNCAsyncStorage (1.15.17):
     - React-Core
   - RNCClipboard (1.8.5):
     - React-Core
@@ -350,6 +350,10 @@ PODS:
     - React-RCTImage
   - RNSha256 (1.4.7):
     - React
+  - twilio-verify-for-react-native (0.2.0):
+    - React-Core
+    - TwilioVerify (~> 1.2.0)
+  - TwilioVerify (1.2.0)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
     - Yoga (~> 1.14)
@@ -413,6 +417,7 @@ DEPENDENCIES:
   - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNSha256 (from `../node_modules/react-native-sha256`)
+  - "twilio-verify-for-react-native (from `../node_modules/@twilio/twilio-verify-for-react-native`)"
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -430,6 +435,7 @@ SPEC REPOS:
     - fmt
     - libevent
     - OpenSSL-Universal
+    - TwilioVerify
     - YogaKit
 
 EXTERNAL SOURCES:
@@ -503,6 +509,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-screens"
   RNSha256:
     :path: "../node_modules/react-native-sha256"
+  twilio-verify-for-react-native:
+    :path: "../node_modules/@twilio/twilio-verify-for-react-native"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -550,11 +558,13 @@ SPEC CHECKSUMS:
   React-RCTVibration: e3ffca672dd3772536cb844274094b0e2c31b187
   React-runtimeexecutor: dec32ee6f2e2a26e13e58152271535fadff5455a
   ReactCommon: 57b69f6383eafcbd7da625bfa6003810332313c4
-  RNCAsyncStorage: ea6b5c280997b2b32a587793163b1f10e580c4f7
+  RNCAsyncStorage: 6bd5a7ba3dde1c3facba418aa273f449bdc5437a
   RNCClipboard: cc054ad1e8a33d2a74cd13e565588b4ca928d8fd
   RNDeviceInfo: 0400a6d0c94186d1120c3cbd97b23abc022187a9
   RNScreens: 6e1ea5787989f92b0671049b808aef64fa1ef98c
   RNSha256: bf2c90a9e0cec6dcbcc4100e4e19715ae7feaa34
+  twilio-verify-for-react-native: f943e25ba7e6daaad43414f5705bf1bb0932b179
+  TwilioVerify: bbee3d3e40b5735ab598b0ad661b068c50931191
   Yoga: e7dc4e71caba6472ff48ad7d234389b91dadc280
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 

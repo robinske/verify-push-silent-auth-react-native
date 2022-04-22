@@ -1,21 +1,89 @@
 import { BASE_URL, PUSH_BACKEND_URL } from "@env";
+import { sha256 } from "react-native-sha256";
+import { getDeviceName, getDeviceToken } from "react-native-device-info";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+import TwilioVerify, {
+  PushFactorPayload,
+  VerifyPushFactorPayload,
+  UpdatePushChallengePayload,
+  ChallengeStatus,
+} from "@twilio/twilio-verify-for-react-native";
+
 export const createFactor = async (phoneNumber) => {
-  // TODO -
-  // 1. hash identity to obfuscate PII
-  // 2. create Factor
-  // 3. verify Factor
-  // 4. store identity and factor SID
+  // identity should not contain PII
+  const identity = await sha256(phoneNumber);
+
+  const response = await fetch(`${PUSH_BACKEND_URL}/access-token`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      identity,
+    }),
+  });
+
+  const json = await response.json();
+
+  const deviceName = await getDeviceName().catch(
+    () => `${phoneNumber}'s Device'`
+  );
+
+  const deviceToken = await getDeviceToken().catch(
+    () => "000000000000000000000000000000000000"
+  );
+
+  const payload = new PushFactorPayload(
+    deviceName,
+    json.serviceSid,
+    json.identity,
+    deviceToken,
+    json.token
+  );
+
+  let factor = await TwilioVerify.createFactor(payload);
+  factor = await TwilioVerify.verifyFactor(
+    new VerifyPushFactorPayload(factor.sid)
+  );
+
+  AsyncStorage.setItem("@factor_sid", factor.sid);
+  AsyncStorage.setItem("@identity", identity);
+
+  return factor.sid;
 };
 
 export const silentAuthorization = async (factorSid) => {
   try {
-    // TODO
-    // 1. get identity from storage
-    // 2. create new challenge
-    // 3. immediately verify challenge
-    // 4. check challenge status to validate
+    const identity = await AsyncStorage.getItem("@identity");
+
+    const data = JSON.stringify({
+      identity,
+      factor: factorSid,
+      message: "Login request",
+    });
+
+    const response = await fetch(`${PUSH_BACKEND_URL}/create-challenge`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: data,
+    });
+
+    const json = await response.json();
+    const challengeSid = json.sid;
+
+    const payload = new UpdatePushChallengePayload(
+      factorSid,
+      challengeSid,
+      ChallengeStatus.Approved
+    );
+    let updated = await TwilioVerify.updateChallenge(payload);
+    updated = await TwilioVerify.getChallenge(challengeSid, factorSid);
+
+    return updated.status === ChallengeStatus.Approved;
   } catch (e) {
     console.error(e);
     return false;
