@@ -17,7 +17,9 @@ const Welcome = ({ navigation }) => {
       />
       <TouchableOpacity
         style={{ backgroundColor: "#36D576", ...styles.button }}
-        onPress={() => navigation.replace("Verifying")}
+        onPress={() => {
+          // TODO add silent authorization
+        }}
       >
         <Text style={commonStyles.buttonText}>Log in</Text>
       </TouchableOpacity>
